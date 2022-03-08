@@ -1,5 +1,5 @@
 function logKobe() {
-    console.log('Kobe');
+    console.log('Kobe barks');
 }
 
 module.exports = { logKobe }
