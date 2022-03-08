@@ -1,0 +1,26 @@
+{
+  "name": "changesets-playground",
+  "version": "0.0.0",
+  "description": "testing changesets",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephanieea/changesets-playground.git"
+  },
+  "workspaces": [
+    "packages/vaila",
+    "packages/kobe"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephanieea/changesets-playground/issues"
+  },
+  "homepage": "https://github.com/stephanieea/changesets-playground#readme",
+  "devDependencies": {
+    "@changesets/cli": "^2.21.1"
+  }
+}
