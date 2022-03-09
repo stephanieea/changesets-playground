@@ -1,6 +1,6 @@
 {
   "name": "changesets-playground",
-  "version": "0.0.1-0",
+  "version": "0.0.1-1",
   "description": "testing changesets",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
     "@changesets/cli": "^2.21.1"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   }
 }
