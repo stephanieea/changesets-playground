@@ -1,0 +1,47 @@
+---
+name: Pull Request
+on:
+  pull_request:
+      branches:
+        - main
+jobs:
+  publish-gpr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          registry-url: https://npm.pkg.github.com/
+          scope: '@stephanieea'
+      - run: npm ci
+      - name: Update and Publish Version
+        id: update-publish-version
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # git config user.name github-actions
+          # git config user.email github-actions@github.com
+
+
+          curl -s -N POST https://api.github.com/graphql \
+            -H "Authorization: bearer $NODE_AUTH_TOKEN" \
+            -d '{"query":"query{repository(owner:\"stephanieea\",name:\"vaila-package\"){packages(first:10){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq '.data.repository.packages.nodes[] | select(.name == "vaila-package").versions.nodes[] | select(.version | contains("-PR-")) | .id' | tr -d '"' \
+            | while read object; do \
+              echo $object
+              curl -X POST https://api.github.com/graphql \
+                -H "Accept: application/vnd.github.package-deletes-preview+json" \
+                -H "Authorization: bearer $NODE_AUTH_TOKEN "\
+                -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
+            done
+          # npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          # npm publish --access public 
+...
+
