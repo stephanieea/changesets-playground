@@ -1,6 +1,6 @@
 {
-  "name": "@stephanieea/changesets-playground",
-  "version": "0.0.1-1",
+  "name": "changesets-playground",
+  "version": "0.0.1-2",
   "description": "testing changesets",
   "main": "index.js",
   "scripts": {
