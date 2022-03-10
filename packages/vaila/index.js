@@ -1,5 +1,5 @@
 function logVaila() {
-    console.log('Vaila');
+    console.log('Vaila barks');
 }
 
 module.exports = { logVaila }

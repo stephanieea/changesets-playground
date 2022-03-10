@@ -14,6 +14,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: lts/*
@@ -27,21 +28,25 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          # git config user.name github-actions
-          # git config user.email github-actions@github.com
-
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
           curl -s -N POST https://api.github.com/graphql \
             -H "Authorization: bearer $NODE_AUTH_TOKEN" \
-            -d '{"query":"query{repository(owner:\"stephanieea\",name:\"vaila-package\"){packages(first:10){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq '.data.repository.packages.nodes[] | select(.name == "vaila-package").versions.nodes[] | select(.version | contains("-PR-")) | .id' | tr -d '"' \
+            -d '{"query":"query{repository(owner:\"stephanieea\",name:\"changesets-playground\"){packages(first:10){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq '.data.repository.packages.nodes[] | select(.name == "changesets-playground").versions.nodes[] | select(.version | contains("-PR-")) | .id' | tr -d '"' \
             | while read object; do \
-              echo $object
               curl -X POST https://api.github.com/graphql \
                 -H "Accept: application/vnd.github.package-deletes-preview+json" \
                 -H "Authorization: bearer $NODE_AUTH_TOKEN "\
                 -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
             done
-          # npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
-          # npm publish --access public 
+
+          npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          npm publish --access public
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ...
 
