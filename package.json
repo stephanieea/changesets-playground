@@ -1,5 +1,5 @@
 {
-  "name": "changesets-playground",
+  "name": "@stephanieea/changesets-playground",
   "version": "0.0.1-1",
   "description": "testing changesets",
   "main": "index.js",
