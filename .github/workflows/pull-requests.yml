@@ -4,6 +4,9 @@ on:
   pull_request:
       branches:
         - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   publish-gpr:
     runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
       - run: npm ci
 
       - name: Create Release Pull Request
-        uses: changesets/action@master
+        uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
