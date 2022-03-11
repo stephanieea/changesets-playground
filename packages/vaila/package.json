@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {},
+  "repository": "https://github.com/stephanieea/changesets-playground",
   "author": "",
   "license": "MIT",
   "publishConfig": {
