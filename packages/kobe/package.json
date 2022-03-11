@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {},
   "author": "",
+  "repository": "https://github.com/stephanieea/changesets-playground",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
