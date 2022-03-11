@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "PR-7-1a82110",
   "initialVersions": {
     "@stephanieea/kobe": "0.0.1-b",
