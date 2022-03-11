@@ -1,0 +1,9 @@
+{
+  "mode": "pre",
+  "tag": "PR-7-1a82110",
+  "initialVersions": {
+    "@stephanieea/kobe": "0.0.1-b",
+    "@stephanieea/vaila": "0.0.1-b.0"
+  },
+  "changesets": []
+}
