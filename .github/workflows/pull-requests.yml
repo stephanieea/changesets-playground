@@ -51,10 +51,13 @@ jobs:
           npx changeset pre enter PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           npx changeset version
           git add .
-          git commit -m "build: update version to $version"
+          git commit -m "build: update version to $version and pre-release"
           npx changeset publish
           git push --follow-tags
           npx changeset pre exit
+          git add .
+          git commit -m "build: exit changeset pre-release mode"
+          git push
           # npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           # npm publish --access public
 ...
