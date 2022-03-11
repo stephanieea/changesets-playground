@@ -42,7 +42,8 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-
+          version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          echo $version
           curl -s -N POST https://api.github.com/graphql \
             -H "Authorization: bearer $NODE_AUTH_TOKEN" \
             -d '{"query":"query{repository(owner:\"stephanieea\",name:\"changesets-playground\"){packages(first:10){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq '.data.repository.packages.nodes[] | select(.name == "changesets-playground").versions.nodes[] | select(.version | contains("-PR-")) | .id' | tr -d '"' \
@@ -52,8 +53,14 @@ jobs:
                 -H "Authorization: bearer $NODE_AUTH_TOKEN "\
                 -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
             done
-
-          npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
-          npm publish --access public
+          npx changeset pre enter PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          npx changeset version
+          git add .
+          git commit -m "build: update version to $version"
+          npx changeset publish
+          git push --follow-tags
+          npx changeset pre exit
+          # npm version prerelease --preid PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          # npm publish --access public
 ...
 
