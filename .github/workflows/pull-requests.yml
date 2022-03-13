@@ -30,6 +30,7 @@ jobs:
     
       - name: Update and Publish Version
         id: update-publish-version
+        continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
         env:
           PR_NUMBER: ${{ github.event.number }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}

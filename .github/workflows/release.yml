@@ -23,12 +23,12 @@ jobs:
       - run: npm ci
       - name: Pubish Patch
         id: publish-patch
+        continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          npm version ${{ github.event.release.tag_name }} --allow-same-version
           npx changeset version
           git add .
           git commit
