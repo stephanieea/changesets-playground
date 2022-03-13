@@ -21,8 +21,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
       - run: npm ci
-      - name: Pubish Patch
-        id: publish-patch
+      - name: Pubish
+        id: publish
         continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

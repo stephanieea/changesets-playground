@@ -2,4 +2,8 @@ function logVaila() {
     console.log('Vaila woof woof');
 }
 
-module.exports = { logVaila }
+function drinkVaila() {
+    console.log('Vaila slurp');
+}
+
+module.exports = { logVaila, drinkVaila }
