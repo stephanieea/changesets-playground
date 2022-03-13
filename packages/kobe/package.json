@@ -1,9 +1,13 @@
 {
-  "name": "kobe",
-  "version": "0.0.1",
+  "name": "@stephanieea/kobe",
+  "version": "0.0.1-b",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "author": "",
-  "license": "MIT"
+  "repository": "https://github.com/stephanieea/changesets-playground",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

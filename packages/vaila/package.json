@@ -1,10 +1,13 @@
 {
-  "name": "vaila",
-  "version": "0.0.0",
+  "name": "@stephanieea/vaila",
+  "version": "0.0.1-b.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
+  "repository": "https://github.com/stephanieea/changesets-playground",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
