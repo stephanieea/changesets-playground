@@ -40,8 +40,7 @@ jobs:
           | jq --arg PR "PR-$PR_NUMBER" '.data.repository.packages.nodes[].versions.nodes[] 
           | select(.version | contains($PR)) 
           | .id' 
-          | tr -d '"' \
-          | while read object; do \
+          | tr -d '"' | while read object; do \
             curl -X POST https://api.github.com/graphql \
               -H "Accept: application/vnd.github.package-deletes-preview+json" \
               -H "Authorization: bearer $NODE_AUTH_TOKEN "\
