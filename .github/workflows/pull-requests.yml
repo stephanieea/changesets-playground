@@ -27,7 +27,23 @@ jobs:
           scope: '@stephanieea'
 
       - run: npm ci
-    
+
+      - name: delete old package versions
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          curl -s -N POST https://api.github.com/graphql \
+            -H "Authorization: bearer $NODE_AUTH_TOKEN" \
+            -d '{"query":"query{repository(owner:\"stephanieea\",name:\"changesets-playground\"){packages(first:100){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq --arg PR_NUMBER "$PR_NUMBER" '.data.repository.packages.nodes[].versions.nodes[] | select(.version | contains("-PR-$PR_NUMBER")) | .id' | tr -d '"' \
+            | while read object; do \
+              curl -X POST https://api.github.com/graphql \
+                -H "Accept: application/vnd.github.package-deletes-preview+json" \
+                -H "Authorization: bearer $NODE_AUTH_TOKEN "\
+                -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
+            done
+
       - name: Update and Publish Version
         id: update-publish-version
         continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
@@ -38,15 +54,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          curl -s -N POST https://api.github.com/graphql \
-            -H "Authorization: bearer $NODE_AUTH_TOKEN" \
-            -d '{"query":"query{repository(owner:\"stephanieea\",name:\"changesets-playground\"){packages(first:100){nodes{name,id,versions(first:100){nodes{id,version,readme}}}}}}"}' | jq --arg PR_NUMBER "$PR_NUMBER" '.data.repository.packages.nodes[].versions.nodes[] | select(.version | contains("-PR-$PR_NUMBER")) | .id' | tr -d '"' \
-            | while read object; do \
-              curl -X POST https://api.github.com/graphql \
-                -H "Accept: application/vnd.github.package-deletes-preview+json" \
-                -H "Authorization: bearer $NODE_AUTH_TOKEN "\
-                -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
-            done
+
           version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           npx changeset version --snapshot $version
           npx changeset publish --tag $version
