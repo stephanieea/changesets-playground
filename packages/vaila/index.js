@@ -10,4 +10,4 @@ function runVaila() {
     console.log('Vaila swish');
 }
 
-module.exports = { logVaila, drinkVaila }
+module.exports = { logVaila, drinkVaila, runVaila }
