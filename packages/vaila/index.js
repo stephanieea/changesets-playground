@@ -6,4 +6,8 @@ function drinkVaila() {
     console.log('Vaila slurp');
 }
 
+function runVaila() {
+    console.log('Vaila swish');
+}
+
 module.exports = { logVaila, drinkVaila }
