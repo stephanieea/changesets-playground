@@ -3,6 +3,7 @@
   "version": "0.0.1-9",
   "description": "testing changesets",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "run": "node index.js"
   },
@@ -10,10 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/stephanieea/changesets-playground.git"
   },
-  "workspaces": [
-    "packages/vaila",
-    "packages/kobe"
-  ],
+  "workspaces": ["packages/*"],
   "author": "",
   "license": "MIT",
   "bugs": {
