@@ -6,5 +6,6 @@ git config user.email github-actions@github.com
 npx changeset version
 git add .
 git commit -m "build: update version on release"
-git push
+# this is not possible until we have a way to push to a protected branch
+# git push 
 npx changeset publish
