@@ -39,7 +39,7 @@ jobs:
           -d '{"query":"query{repository(owner:\"stephanieea\",name:\"changesets-playground\"){packages(first:100){nodes{name,id,versions(first:100){nodes{id,version}}}}}}"}' \
           | jq -r --arg PR "PR-$PR_NUMBER" '.data.repository.packages.nodes[].versions.nodes[] 
           | select(.version | contains($PR)) 
-          | .id' 
+          | .id' \
           | while read object; do \
             curl -X POST https://api.github.com/graphql \
               -H "Accept: application/vnd.github.package-deletes-preview+json" \
