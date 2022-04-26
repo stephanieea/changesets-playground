@@ -36,7 +36,8 @@ jobs:
       - name: globall install
         if: steps.cache-changesets.outputs.cache-hit != 'true'
         run: |
-          sudo npm i -g @changesets/cli
+          sudo chown -R $USER /usr/local/lib/node_modules
+          npm i -g @changesets/cli
         
       - name: list globals
         run: npm list -g
