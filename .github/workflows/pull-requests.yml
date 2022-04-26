@@ -41,7 +41,7 @@ jobs:
         if: steps.cache-changesets.outputs.cache-hit != 'true'
         run: |
           sudo npm i -g @changesets/cli
-
+          npm list -g --depth 0
 
       # - run: npm ci
 
@@ -76,6 +76,7 @@ jobs:
           git config user.email github-actions@github.com
 
           version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
+          npx cowsay "goodbye"
           npx changeset version --snapshot $version
           npx changeset publish --tag $version
 ...
