@@ -25,6 +25,10 @@ jobs:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
+      
+      - name: test npx
+        run: |
+          npx cowsay "hello"
 
       - name: Cache Changesets
         id: cache-changesets
@@ -35,8 +39,8 @@ jobs:
 
       - name: globall install
         if: steps.cache-changesets.outputs.cache-hit != 'true'
-        env:
-          NPM_CONFIG_PREFIX: "~/.npm-global"
+        # env:
+          # NPM_CONFIG_PREFIX: "~/.npm-global"
         run: |
           npm i -g @changesets/cli
 
