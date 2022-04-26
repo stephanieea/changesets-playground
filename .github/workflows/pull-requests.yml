@@ -39,6 +39,7 @@ jobs:
           NPM_CONFIG_PREFIX: "~/.npm-global"
         run: |
           npm i -g @changesets/cli
+          cd ~ && pwd
 
 
       - run: npm ci
