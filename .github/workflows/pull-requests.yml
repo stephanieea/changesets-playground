@@ -42,7 +42,7 @@ jobs:
           cd ~ && pwd
 
 
-      - run: npm ci
+      # - run: npm ci
 
       - name: delete old package versions
         env:
