@@ -77,6 +77,6 @@ jobs:
 
           version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           npx cowsay "goodbye"
-          npx changeset version --snapshot $version
-          npx changeset publish --tag $version
+          npx @changesets/cli version --snapshot $version
+          npx @changesets/cli publish --tag $version
 ...
