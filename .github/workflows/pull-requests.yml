@@ -25,6 +25,11 @@ jobs:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
+      
+      - name: globall install
+        run: |
+          npm i -g jquery
+          tree -a
 
       - run: npm ci
 
