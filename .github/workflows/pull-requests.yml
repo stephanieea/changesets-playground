@@ -33,11 +33,11 @@ jobs:
       #     path: "~/.npm-global"
       #     key: ${{ runner.os }}-${{ steps.node-version.outputs.NODE_VERSION }}-changesets-${{ hashFiles('package-lock.json') }}
 
-      - name: globall install
-        if: steps.cache-changesets.outputs.cache-hit != 'true'
-        run: |
-          sudo chown -R $USER /usr/local/lib/node_modules
-          npm i -g @changesets/cli
+      # - name: globall install
+      #   if: steps.cache-changesets.outputs.cache-hit != 'true'
+      #   run: |
+      #     sudo chown -R $USER /usr/local/lib/node_modules
+      #     npm i -g @changesets/cli
         
       - name: list globals
         run: npm list -g
