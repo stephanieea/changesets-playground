@@ -30,19 +30,17 @@ jobs:
         run: |
           npx cowsay "hello"
 
-      - name: Cache Changesets
-        id: cache-changesets
-        uses: actions/cache@v3
-        with:
-          path: "~/.npm-global"
-          key: ${{ runner.os }}-${{ steps.node-version.outputs.NODE_VERSION }}-changesets-${{ hashFiles('package-lock.json') }}
+      # - name: Cache Changesets
+      #   id: cache-changesets
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: "~/.npm-global"
+      #     key: ${{ runner.os }}-${{ steps.node-version.outputs.NODE_VERSION }}-changesets-${{ hashFiles('package-lock.json') }}
 
       - name: globall install
         if: steps.cache-changesets.outputs.cache-hit != 'true'
-        # env:
-          # NPM_CONFIG_PREFIX: "~/.npm-global"
         run: |
-          npm i -g @changesets/cli
+          sudo npm i -g @changesets/cli
 
 
       # - run: npm ci
