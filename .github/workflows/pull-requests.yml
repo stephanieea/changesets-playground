@@ -39,11 +39,11 @@ jobs:
       #     sudo chown -R $USER /usr/local/lib/node_modules
       #     npm i -g @changesets/cli
         
-      - name: list globals
-        run: npm list -g
+      # - name: list globals
+      #   run: npm list -g
 
-      - name: tree
-        run: tree -a
+      # - name: tree
+      #   run: tree -a
 
       - name: delete old package versions
         env:
@@ -63,6 +63,16 @@ jobs:
               -H "Authorization: bearer $NODE_AUTH_TOKEN "\
               -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
           done
+
+      - name: Remove dependencies
+        run: |
+          rm package-lock.json package.json
+
+      - name: Install Changesets
+        run: npm install @changesets/cli
+
+      - name: tree
+        run: tree -a
 
       - name: Update and Publish Version
         id: update-publish-version
