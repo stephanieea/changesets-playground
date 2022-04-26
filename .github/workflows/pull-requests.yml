@@ -25,10 +25,6 @@ jobs:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
-      
-      - name: test npx
-        run: |
-          npx cowsay "hello"
 
       # - name: Cache Changesets
       #   id: cache-changesets
@@ -41,8 +37,9 @@ jobs:
         if: steps.cache-changesets.outputs.cache-hit != 'true'
         run: |
           sudo npm i -g @changesets/cli
-          npm list -g
-      # - run: npm ci
+        
+      - name: list globals
+        run: npm list -g
 
       - name: delete old package versions
         env:
