@@ -19,6 +19,14 @@ jobs:
           scope: '@stephanieea'
       - run: npm ci
 
+      - name: test push
+        run: |
+          touch test.json
+          git add .
+          git commit -m 'testing'
+          git push
+
+
       - name: Update and Publish Canary Version
         id: update-publish-canary
         continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
