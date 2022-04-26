@@ -41,8 +41,7 @@ jobs:
         if: steps.cache-changesets.outputs.cache-hit != 'true'
         run: |
           sudo npm i -g @changesets/cli
-          npm list -g --depth 0
-
+          npm list -g
       # - run: npm ci
 
       - name: delete old package versions
