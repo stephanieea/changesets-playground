@@ -25,13 +25,21 @@ jobs:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
-      
+
+      - name: Cache Changesets
+        id: cache-changesets
+        uses: actions/cache@v3
+        with:
+          path: "~/.npm-global"
+          key: ${{ runner.os }}-${{ steps.node-version.outputs.NODE_VERSION }}-changesets-${{ hashFiles('package-lock.json') }}
+
       - name: globall install
+        if: steps.cache-changesets.outputs.cache-hit != 'true'
+        env:
+          NPM_CONFIG_PREFIX: "~/.npm-global"
         run: |
-          npm i -g jquery
-          cd ../../../../..
-          pwd
-          tree -a
+          npm i -g @changesets/cli
+
 
       - run: npm ci
 
