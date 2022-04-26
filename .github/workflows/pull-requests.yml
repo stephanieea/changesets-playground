@@ -29,7 +29,8 @@ jobs:
       - name: globall install
         run: |
           npm i -g jquery
-          cd ../..
+          cd ../../..
+          pwd
           tree -a
 
       - run: npm ci
