@@ -41,6 +41,9 @@ jobs:
       - name: list globals
         run: npm list -g
 
+      - name: tree
+        run: tree -a
+
       - name: delete old package versions
         env:
           PR_NUMBER: ${{ github.event.number }}
