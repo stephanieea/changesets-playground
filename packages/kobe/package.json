@@ -3,7 +3,9 @@
   "version": "0.0.2",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "release": "npx changeset publish"
+  },
   "author": "",
   "repository": "https://github.com/stephanieea/changesets-playground",
   "license": "MIT",
