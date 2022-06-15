@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs: 
   publish-gpr:
     runs-on: ubuntu-latest
@@ -12,22 +15,38 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
+
       - run: npm ci
 
-      - name: Update and Publish Canary Version
-        id: update-publish-canary
-        continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        id: changesets
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          version=canary
-          npx changeset version --snapshot $version
-          npx changeset publish --tag $version
+
+      - name: Log changesets outputs
+        run: echo "${{ toJSON(steps.changesets.outputs) }}"
+
+      - name: Send a Slack notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        run: echo "A new version of ${GITHUB_REPOSITORY} was published!"
+
+      # - name: Update and Publish Canary Version
+      #   id: update-publish-canary
+      #   continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      #   run: |
+      #     git config user.name github-actions
+      #     git config user.email github-actions@github.com
+      #     version=canary
+      #     npx changeset version --snapshot $version
+      #     npx changeset publish --tag $version
 ...
