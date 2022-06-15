@@ -1,5 +1,11 @@
 # kobe
 
+## 0.0.4
+
+### Patch Changes
+
+- 6898494: add release script to root package json
+
 ## 0.0.3
 
 ### Patch Changes
