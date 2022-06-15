@@ -1,5 +1,11 @@
 # kobe
 
+## 0.0.3
+
+### Patch Changes
+
+- 9ca84c8: add release script that calls changeset publish
+
 ## 0.0.2
 
 ### Patch Changes
