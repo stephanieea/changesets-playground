@@ -1,5 +1,13 @@
 # kobe
 
+## 0.0.3
+
+### Patch Changes
+
+- This is a test patch
+- 6898494: add release script to root package json
+- 9ca84c8: add release script that calls changeset publish
+
 ## 0.0.2
 
 ### Patch Changes
