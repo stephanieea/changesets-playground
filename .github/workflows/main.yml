@@ -32,8 +32,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          publish: npm run release
 
       - name: Log changesets outputs
         run: echo "${{ toJSON(steps.changesets.outputs) }}"
