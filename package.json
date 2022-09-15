@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "run": "node index.js",
-    "release": "npx changeset publish",
-    "version": "npx changeset version"
+    "release": "npx changeset publish"
   },
   "repository": {
     "type": "git",
