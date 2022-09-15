@@ -7,7 +7,7 @@
   "scripts": {
     "run": "node index.js",
     "release": "npx changeset publish",
-    "version": "npx changeset version && npm i --package-lock-only"
+    "version": "npx changeset version"
   },
   "repository": {
     "type": "git",
