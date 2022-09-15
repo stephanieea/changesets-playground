@@ -26,6 +26,8 @@ jobs:
 
       - run: npm ci
 
+      - run: tree
+
       - name: Create Release Pull Request
         uses: changesets/action@v1
         id: changesets
