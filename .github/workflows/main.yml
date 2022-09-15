@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          version: ./update-lock
+          version: ./update-lock.sh
 
       - name: Log changesets outputs
         run: echo "${{ toJSON(steps.changesets.outputs) }}"
