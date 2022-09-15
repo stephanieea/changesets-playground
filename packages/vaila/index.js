@@ -7,7 +7,7 @@ function drinkVaila() {
 }
 
 function runVaila() {
-    console.log('Vaila swish');
+    console.log('Vaila woosh');
 }
 
 module.exports = { logVaila, drinkVaila, runVaila }
