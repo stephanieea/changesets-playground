@@ -24,26 +24,10 @@ jobs:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
-
-      - name: Get Node Version
-        id: node-version
-        run: |
-          NODE_VERSION=$(node -v)
-          echo "::set-output name=NODE_VERSION::$NODE_VERSION"
   
-      - name: Get Changesets Version
-        id: changesets-version
-        run: |
-          CHANGESETS_VERSION=$(npm show @changesets/cli version)
-          echo "::set-output name=CHANGESETS_VERSION::$CHANGESETS_VERSION"
-
-      - name: Cache Changesets
-        id: cache-changesets
-        uses: actions/cache@v3
-        with:
-          path: "node_modules"
-          key: ${{ steps.node-version.outputs.NODE_VERSION }}-${{ steps.changesets-version.outputs.CHANGESETS_VERSION }}-changesets }}
-
+      - name: install
+        run: npm ci
+    
       - name: delete old package versions
         env:
           PR_NUMBER: ${{ github.event.number }}
