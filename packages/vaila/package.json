@@ -9,8 +9,5 @@
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  },
-  "dependencies": {
-    "@stephanieea/vaila": "*"
   }
 }
