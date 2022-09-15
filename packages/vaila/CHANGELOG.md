@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.5
+
+### Patch Changes
+
+- 63c6940: update vaila
+
 ## 0.0.4
 
 ### Patch Changes
