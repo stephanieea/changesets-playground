@@ -16,8 +16,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v2
-        # with:
-          # ref: ${{ github.event.pull_request.head.ref }}
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - uses: actions/setup-node@v2
         with:
