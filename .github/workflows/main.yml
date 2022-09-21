@@ -28,9 +28,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
 
-      - run: npm uninstall *
-
-      - run: npm install @changesets/cli
+      - run: npm ci
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
