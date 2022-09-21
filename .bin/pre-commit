@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+branch=`git symbolic-ref HEAD`
+if [ "$branch" = "refs/heads/master" ]; then
+		printf "\nIMPORTANT: Direct commits to the master branch are not allowed.\n\n"
+		exit 1
+fi

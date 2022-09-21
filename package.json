@@ -6,13 +6,16 @@
   "private": true,
   "scripts": {
     "run": "node index.js",
-    "release": "npx changeset publish"
+    "release": "npx changeset publish",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephanieea/changesets-playground.git"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
@@ -20,7 +23,8 @@
   },
   "homepage": "https://github.com/stephanieea/changesets-playground#readme",
   "devDependencies": {
-    "@changesets/cli": "^2.21.1"
+    "@changesets/cli": "^2.21.1",
+    "husky": "^8.0.1"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
