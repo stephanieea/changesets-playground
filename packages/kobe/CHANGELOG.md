@@ -1,5 +1,21 @@
 # kobe
 
+## 0.0.7
+
+### Patch Changes
+
+- 26f58c2: test patch update
+- 4fa19d1: test patch update
+- f786fb3: test patch changeset
+- 4975c0d: test patch change
+- 4caae0c: test patch version update
+- Updated dependencies [26f58c2]
+- Updated dependencies [4fa19d1]
+- Updated dependencies [f786fb3]
+- Updated dependencies [4975c0d]
+- Updated dependencies [4caae0c]
+  - @stephanieea/vaila@0.0.8
+
 ## 0.0.6
 
 ### Patch Changes
