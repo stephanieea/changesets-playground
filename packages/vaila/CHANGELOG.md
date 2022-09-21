@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.7
+
+### Patch Changes
+
+- a532927: test patch all packages
+
 ## 0.0.6
 
 ### Patch Changes

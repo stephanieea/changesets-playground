@@ -1,5 +1,13 @@
 # kobe
 
+## 0.0.6
+
+### Patch Changes
+
+- a532927: test patch all packages
+- Updated dependencies [a532927]
+  - @stephanieea/vaila@0.0.7
+
 ## 0.0.5
 
 ### Patch Changes
