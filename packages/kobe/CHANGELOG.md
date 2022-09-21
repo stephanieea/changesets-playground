@@ -1,5 +1,13 @@
 # kobe
 
+## 0.0.8
+
+### Patch Changes
+
+- ef7728b: test patch changeset
+- Updated dependencies [ef7728b]
+  - @stephanieea/vaila@0.0.9
+
 ## 0.0.7
 
 ### Patch Changes

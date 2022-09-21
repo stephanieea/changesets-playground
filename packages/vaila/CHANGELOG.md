@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.9
+
+### Patch Changes
+
+- ef7728b: test patch changeset
+
 ## 0.0.8
 
 ### Patch Changes
