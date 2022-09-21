@@ -6,6 +6,8 @@ on:
     - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
+env:
+  HUSKY: 0
 
 jobs: 
   publish-gpr:
