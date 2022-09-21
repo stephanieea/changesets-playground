@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.6
+
+### Patch Changes
+
+- 89d2747: add changeset for test
+
 ## 0.0.5
 
 ### Patch Changes
