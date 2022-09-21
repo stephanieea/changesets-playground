@@ -24,7 +24,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@stephanieea'
 
-      - run: npm ci
+      # - run: npm ci
 
       - run: tree
 
