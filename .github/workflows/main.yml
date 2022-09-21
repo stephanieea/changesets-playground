@@ -19,6 +19,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v2
         with:
@@ -27,8 +29,6 @@ jobs:
           scope: '@stephanieea'
 
       # - run: npm ci
-
-      - run: tree
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
