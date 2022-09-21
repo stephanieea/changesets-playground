@@ -9,6 +9,11 @@
     "release": "npx changeset publish",
     "prepare": "husky install"
   },
+  "lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --max-warnings=0 --fix"
+		]
+	},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephanieea/changesets-playground.git"
