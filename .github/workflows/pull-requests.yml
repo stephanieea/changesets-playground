@@ -58,6 +58,8 @@ jobs:
           version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           error=$(npx changeset version --snapshot $VERSION 2>&1 >/dev/null)
           [[ $error == *"No unreleased changesets found"* ]] && hasChangesets="false" || hasChangesets="true"
+          echo 'hasChangesets'
+          echo "$hasChangesets"
           echo '::set-output name=hasChangesets::${hasChangesets}'
 
         # Update package-lock.json with changeset version
