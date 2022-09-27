@@ -77,7 +77,7 @@ jobs:
         # Update package-lock.json with changeset version
       - name: Install Updated Package(s)
         id: install-updated-packages
-        if: steps.update-version.outputs.hasChangesets == 'true'
+        if: steps.update-version.outputs.hasChangesets == "true"
         run: npm install --package-lock-only
 
       - name: Publish Version
