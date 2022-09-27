@@ -62,6 +62,18 @@ jobs:
           echo "$hasChangesets"
           echo '::set-output name=hasChangesets::${hasChangesets}'
 
+      - name: test if without quotes
+        if: steps.changeset.outputs.hasChangesets == true
+        env: 
+          HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
+        run: echo $HAS_CHANGESETS
+
+      - name: test if with expression syntax
+        if: ${{ steps.changeset.outputs.hasChangesets == 'true' }}
+        env: 
+          HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
+        run: echo $HAS_CHANGESETS
+
         # Update package-lock.json with changeset version
       - name: Install Updated Package(s)
         id: install-updated-packages
