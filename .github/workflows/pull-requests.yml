@@ -63,13 +63,13 @@ jobs:
           echo '::set-output name=hasChangesets::${hasChangesets}'
 
       - name: test if without quotes
-        if: steps.changeset.outputs.hasChangesets == true
+        if: steps.update-version.outputs.hasChangesets == true
         env: 
           HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
         run: echo $HAS_CHANGESETS
 
       - name: test if with expression syntax
-        if: ${{ steps.changeset.outputs.hasChangesets == 'true' }}
+        if: ${{ steps.update-version.outputs.hasChangesets == 'true' }}
         env: 
           HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
         run: echo $HAS_CHANGESETS
