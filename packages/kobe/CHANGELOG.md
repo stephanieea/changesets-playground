@@ -1,5 +1,13 @@
 # kobe
 
+## 0.0.9
+
+### Patch Changes
+
+- d222fd0: testing
+- Updated dependencies [d222fd0]
+  - @stephanieea/vaila@0.0.10
+
 ## 0.0.8
 
 ### Patch Changes

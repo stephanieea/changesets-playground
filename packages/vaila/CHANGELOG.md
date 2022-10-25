@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.10
+
+### Patch Changes
+
+- d222fd0: testing
+
 ## 0.0.9
 
 ### Patch Changes
