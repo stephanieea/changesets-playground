@@ -47,18 +47,46 @@ jobs:
               -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:'\\\"${object}\\\"'}) { success }}"}'; \
           done
 
-      - name: Update and Publish Version
-        id: update-publish-version
+      - name: Update Version
+        id: update-version
         continue-on-error: true # there may be an expected error when trying to publish a package version over existing version
         env:
           PR_NUMBER: ${{ github.event.number }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
           version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
-          npx @changesets/cli version --snapshot $version
+          error=$(npx changeset version --snapshot $VERSION 2>&1 >/dev/null)
+          [[ $error == *"No unreleased changesets found"* ]] && hasChangesets="false" || hasChangesets="true"
+          echo 'hasChangesets'
+          echo "$hasChangesets"
+          echo '::set-output name=hasChangesets::${hasChangesets}'
+
+      - name: test if without quotes
+        if: ${{ steps.update-version.outputs.hasChangesets }} == true
+        env: 
+          HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
+        run: echo $HAS_CHANGESETS
+
+      - name: test if with expression syntax
+        if: ${{ steps.update-version.outputs.hasChangesets == 'true' }}
+        env: 
+          HAS_CHANGESETS: ${{ steps.changest.outputs.hasChangesets }}
+        run: echo $HAS_CHANGESETS
+
+        # Update package-lock.json with changeset version
+      - name: Install Updated Package(s)
+        id: install-updated-packages
+        if: steps.update-version.outputs.hasChangesets == true
+        run: npm install --package-lock-only
+
+      - name: Publish Version
+        if: steps.update-version.outputs.hasChangesets == 'true'
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          version=PR-${PR_NUMBER}-${PR_HEAD_SHA:0:7}
           npx @changesets/cli publish --tag $version
 ...
