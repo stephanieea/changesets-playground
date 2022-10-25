@@ -1,5 +1,11 @@
 # @stephanieea/vaila
 
+## 0.0.10
+
+### Patch Changes
+
+- 233e941: testing patch
+
 ## 0.0.9
 
 ### Patch Changes
